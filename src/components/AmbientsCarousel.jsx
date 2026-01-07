@@ -5,7 +5,7 @@ const slides = [
     {
         title: "Bancadas de Cozinha",
         desc: "Funcionalidade e elegância para o coração do seu lar.",
-        image: "https://images.unsplash.com/photo-1556911220-410a562ef61f?q=80&w=2522&auto=format&fit=crop"
+        image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=2522&auto=format&fit=crop"
     },
     {
         title: "Banheiros de Luxo",
