@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Services from './components/Services';
-import AmbientsCarousel from './components/AmbientsCarousel';
-import About from './components/About';
-import Differentials from './components/Differentials';
-import HowItWorks from './components/HowItWorks';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+
+// Lazy load non-critical components
+const Services = lazy(() => import('./components/Services'));
+const AmbientsCarousel = lazy(() => import('./components/AmbientsCarousel'));
+const About = lazy(() => import('./components/About'));
+const Differentials = lazy(() => import('./components/Differentials'));
+const HowItWorks = lazy(() => import('./components/HowItWorks'));
 
 function App() {
     return (
@@ -15,11 +17,13 @@ function App() {
             <Header />
             <main className="flex-grow">
                 <Hero />
-                {<About />}
-                <AmbientsCarousel />
-                <Services />
-                <Differentials />
-                <HowItWorks />
+                <Suspense fallback={<div className="h-96 flex items-center justify-center">Carregando...</div>}>
+                    <About />
+                    <AmbientsCarousel />
+                    <Services />
+                    <Differentials />
+                    <HowItWorks />
+                </Suspense>
             </main>
             <Footer />
             <WhatsAppButton />

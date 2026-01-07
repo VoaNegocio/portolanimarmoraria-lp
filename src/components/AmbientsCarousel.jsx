@@ -5,22 +5,22 @@ const slides = [
     {
         title: "Bancadas de Cozinha",
         desc: "Funcionalidade e elegância para o coração do seu lar.",
-        image: "/bancadacozinha.png"
+        image: "/bancadacozinha.webp"
     },
     {
         title: "Banheiros de Luxo",
         desc: "Transforme seu banho em um spa particular com mármores exclusivos.",
-        image: "/banheirodeluxo.png"
+        image: "/banheirodeluxo.webp"
     },
     {
         title: "Áreas Gourmet",
         desc: "Resistência e beleza para receber amigos e família.",
-        image: "/areagourmet.png"
+        image: "/areagourmet.webp"
     },
     {
         title: "Escadas e Pisos",
         desc: "Acabamentos perfeitos que valorizam cada passo.",
-        image: "/escada.png"
+        image: "/escada.webp"
     }
 ];
 

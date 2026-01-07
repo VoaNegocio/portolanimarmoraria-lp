@@ -11,7 +11,7 @@ const About = () => {
                     {/* Imagem de Fundo/Contexto */}
                     <div className="w-full md:w-3/5 h-[400px] md:h-[600px] relative z-0">
                         <img
-                            src="/chapademarmore.png"
+                            src="/chapademarmore.webp"
                             alt="Chapa de Mármore Exclusivo"
                             className="w-full h-full object-cover rounded-lg shadow-xl"
                         />

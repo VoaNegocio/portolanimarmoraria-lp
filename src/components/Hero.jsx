@@ -9,7 +9,7 @@ const Hero = () => {
             {/* Background Image */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: 'url(/hero3.png)' }}
+                style={{ backgroundImage: 'url(/hero3.webp)' }}
                 role="img"
                 aria-label="Cozinha com mármore"
             >
