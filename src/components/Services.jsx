@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CTAButton from './CTAButton';
 
 const StoneCard = ({ title, image }) => {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -61,19 +62,22 @@ const Services = () => {
 
                 <div className="mb-16">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <StoneCard title="Pedras Clássicas" image="./public/pedras/pedrasclassicas.webp" />
-                        <StoneCard title="Pedras Refinadas" image="./public/pedras/pedrasrefinadas.webp" />
-                        <StoneCard title="Pedras Exóticas" image="./public/pedras/pedrasexoticas.webp" />
+                        <StoneCard title="Pedras Clássicas" image="/pedras/pedrasclassicas.webp" />
+                        <StoneCard title="Pedras Refinadas" image="/pedras/pedrasrefinadas.webp" />
+                        <StoneCard title="Pedras Exóticas" image="/pedras/pedrasexoticas.webp" />
                     </div>
                 </div>
 
                 <div className="text-center mt-12">
-                    <a
+                    <CTAButton
                         href="https://api.whatsapp.com/send?phone=5516997730808&text=Ol%C3%A1!%20Estou%20no%20site%20e%20gostaria%20de%20um%20Or%C3%A7amento."
-                        className="inline-block bg-gray-900 text-white font-medium py-3 px-8 rounded hover:bg-gray-800 transition-colors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variant="secondary"
+                        className="py-3 px-8"
                     >
                         VER CATÁLOGO COMPLETO NO WHATSAPP
-                    </a>
+                    </CTAButton>
                 </div>
             </div>
         </section>

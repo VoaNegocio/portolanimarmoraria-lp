@@ -5,22 +5,22 @@ const slides = [
     {
         title: "Bancadas de Cozinha",
         desc: "Funcionalidade e elegância para o coração do seu lar.",
-        image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=2522&auto=format&fit=crop"
+        image: "/bancadacozinha.png"
     },
     {
         title: "Banheiros de Luxo",
         desc: "Transforme seu banho em um spa particular com mármores exclusivos.",
-        image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=2574&auto=format&fit=crop"
+        image: "/banheirodeluxo.png"
     },
     {
         title: "Áreas Gourmet",
         desc: "Resistência e beleza para receber amigos e família.",
-        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653&auto=format&fit=crop"
+        image: "/areagourmet.png"
     },
     {
         title: "Escadas e Pisos",
         desc: "Acabamentos perfeitos que valorizam cada passo.",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop"
+        image: "/escada.png"
     }
 ];
 
@@ -36,7 +36,7 @@ const AmbientsCarousel = () => {
     };
 
     return (
-        <section className="bg-[#127D86] py-16 text-white relative overflow-hidden">
+        <section className="bg-gray-900 py-16 text-white relative overflow-hidden">
             {/* Background elements if needed */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -61,12 +61,12 @@ const AmbientsCarousel = () => {
                                 />
 
                                 {/* Gradient Overlay for better text visibility potentially, though design shows specific card */}
-                                <div className="absolute inset-0 bg-black/10"></div>
+                                <div className="absolute inset-0 bg-black/20"></div>
                             </div>
                         ))}
 
                         {/* Floating Info Card - Bottom Left */}
-                        <div className="absolute bottom-8 left-8 bg-[#127D86] p-6 rounded-lg max-w-sm shadow-xl z-20">
+                        <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-auto bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-xl max-w-sm shadow-xl z-20">
                             <h3 className="text-xl font-bold mb-2 text-white">
                                 {slides[current].title}
                             </h3>

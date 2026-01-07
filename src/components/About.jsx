@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
+import CTAButton from './CTAButton';
 
 const About = () => {
     return (
@@ -10,8 +11,8 @@ const About = () => {
                     {/* Imagem de Fundo/Contexto */}
                     <div className="w-full md:w-3/5 h-[400px] md:h-[600px] relative z-0">
                         <img
-                            src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=2574&auto=format&fit=crop"
-                            alt="Banheiro de luxo com mármore"
+                            src="/chapademarmore2.png"
+                            alt="Chapa de Mármore Exclusivo"
                             className="w-full h-full object-cover rounded-lg shadow-xl"
                         />
                         {/* Elemento decorativo quadrado */}
@@ -28,15 +29,16 @@ const About = () => {
                                 Na Marmoraria Portolani, transformamos seus sonhos em realidade com nossas soluções versáteis em mármore e granito. Seja para uma cozinha moderna, um banheiro luxuoso ou uma área de lazer sofisticada, temos a pedra perfeita e a expertise para executar seu projeto com perfeição.
                             </p>
 
-                            <a
+                            <CTAButton
                                 href="https://api.whatsapp.com/send?phone=5516997730808&text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20as%20socu%C3%A7%C3%B5es%20da%20Marmoraria."
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg group"
+                                className="py-3 px-8"
+                                pulse={true}
                             >
                                 <FaWhatsapp className="mr-2 text-xl group-hover:animate-bounce" />
                                 FALE CONOSCO PELO WHATSAPP
-                            </a>
+                            </CTAButton>
                         </div>
                     </div>
 
