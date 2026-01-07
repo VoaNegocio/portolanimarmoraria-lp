@@ -11,7 +11,7 @@ const About = () => {
                     {/* Imagem de Fundo/Contexto */}
                     <div className="w-full md:w-3/5 h-[400px] md:h-[600px] relative z-0">
                         <img
-                            src="/chapademarmore2.png"
+                            src="/chapademarmore.png"
                             alt="Chapa de Mármore Exclusivo"
                             className="w-full h-full object-cover rounded-lg shadow-xl"
                         />
@@ -30,7 +30,7 @@ const About = () => {
                             </p>
 
                             <CTAButton
-                                href="https://api.whatsapp.com/send?phone=5516997730808&text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20as%20socu%C3%A7%C3%B5es%20da%20Marmoraria."
+                                href="https://api.whatsapp.com/send?phone=5516997531780&text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20Marmoraria."
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="py-3 px-8"

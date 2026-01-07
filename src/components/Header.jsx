@@ -10,9 +10,11 @@ const Header = () => {
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
                     <div className="flex-shrink-0 flex items-center">
-                        <span className="text-xl font-bold text-gray-800 uppercase tracking-wide">
-                            Marmoraria Portolani
-                        </span>
+                        <img
+                            src="/logomarmoraria.png"
+                            alt="Marmoraria Portolani Logo"
+                            className="h-12 w-auto md:h-20 object-contain"
+                        />
                     </div>
 
                     {/* Desktop Navigation */}

@@ -28,7 +28,7 @@ const Hero = () => {
                     </p>
 
                     <CTAButton
-                        href="https://api.whatsapp.com/send?phone=5516997730808&text=Ol%C3%A1!%20Estou%20no%20site%20e%20gostaria%20de%20um%20Or%C3%A7amento."
+                        href="https://api.whatsapp.com/send?phone=5516997531780&text=Ol%C3%A1!%20Estou%20no%20site%20e%20gostaria%20de%20um%20Or%C3%A7amento."
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full md:w-auto py-4 px-8 text-sm tracking-wide uppercase gap-2"

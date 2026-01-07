@@ -63,7 +63,7 @@ const HowItWorks = () => {
                             </div>
 
                             <a
-                                href="https://api.whatsapp.com/send?phone=5516997730808&text=Ol%C3%A1!%20Gostaria%20de%20iniciar%20um%20projeto."
+                                href="https://api.whatsapp.com/send?phone=5516997531780&text=Ol%C3%A1!%20Gostaria%20de%20iniciar%20um%20projeto."
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg group w-full md:w-auto"
