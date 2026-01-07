@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const StoneCard = ({ title, image }) => {
+    const [isFlipped, setIsFlipped] = useState(false);
+
     return (
-        <div className="group h-80 perspective-1000">
-            {/* Flip Wrapper - Reacts to Hover */}
-            <div className="relative w-full h-full transition-transform duration-500 transform-style-3d group-hover:rotate-y-180 rounded-lg shadow-sm hover:shadow-2xl">
+        <div
+            className="h-[450px] perspective-1000 cursor-pointer"
+            onClick={() => setIsFlipped(!isFlipped)}
+        >
+            {/* Wrapper que realiza o giro 3D */}
+            <div className={`relative w-full h-full transition-transform duration-[1500ms] transform-style-3d rounded-lg shadow-sm hover:shadow-2xl ${isFlipped ? 'rotate-y-180' : ''}`}>
 
                 {/* Front Face */}
                 <div className="absolute w-full h-full backface-hidden bg-gray-50 rounded-lg transform-style-3d flex flex-col items-center justify-center pt-8 pb-4">
                     {/* Floating Image Layer */}
-                    <div className="w-10/12 h-48 rounded-lg overflow-hidden transform-style-3d shadow-xl translate-z-30">
+                    <div className="w-10/12 h-[320px] rounded-lg overflow-hidden transform-style-3d shadow-xl translate-z-30">
                         <img
                             src={image}
                             alt={title}
@@ -54,39 +59,11 @@ const Services = () => {
                     </p>
                 </div>
 
-                {/* Clássicas */}
                 <div className="mb-16">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-moria-green pl-4">
-                        Pedras Clássicas
-                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <StoneCard title="Verde Ubatuba" image="https://unsplash.com/pt-br/fotografias/um-close-up-de-uma-superficie-de-marmore-verde-bAtRq2rH1Io" />
-                        <StoneCard title="Preto São Gabriel" image="https://images.unsplash.com/photo-1617136746864-f3a74312ce0f?q=80&w=1000&auto=format&fit=crop" />
-                        <StoneCard title="Cinza Andorinha" image="https://images.unsplash.com/photo-1598555836952-b4c48398436e?q=80&w=1000&auto=format&fit=crop" />
-                    </div>
-                </div>
-
-                {/* Refinadas */}
-                <div className="mb-16">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-moria-green pl-4">
-                        Opções Refinadas
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <StoneCard title="Branco Paraná" image="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1000&auto=format&fit=crop" />
-                        <StoneCard title="Mármore Carrara" image="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1000&auto=format&fit=crop" />
-                        <StoneCard title="Granito Preto Absoluto" image="https://images.unsplash.com/photo-1629196914375-f7e48f477b6d?q=80&w=1000&auto=format&fit=crop" />
-                    </div>
-                </div>
-
-                {/* Exóticas */}
-                <div className="mb-12">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-moria-green pl-4">
-                        Pedras Exóticas
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <StoneCard title="Azul Bahia" image="https://images.unsplash.com/photo-1618212641753-41bbd93bd3dd?q=80&w=1000&auto=format&fit=crop" />
-                        <StoneCard title="Sodalita" image="https://images.unsplash.com/photo-1633512392765-5c743845b4c4?q=80&w=1000&auto=format&fit=crop" />
-                        <StoneCard title="Ônix" image="https://plus.unsplash.com/premium_photo-1664303499312-917c50e4047b?q=80&w=1000&auto=format&fit=crop" />
+                        <StoneCard title="Pedras Clássicas" image="./public/pedras/pedrasclassicas.webp" />
+                        <StoneCard title="Pedras Refinadas" image="./public/pedras/pedrasrefinadas.webp" />
+                        <StoneCard title="Pedras Exóticas" image="./public/pedras/pedrasexoticas.webp" />
                     </div>
                 </div>
 

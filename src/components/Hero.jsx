@@ -22,7 +22,7 @@ const Hero = () => {
                         Transforme Seu Espaço com a Beleza Atemporal do Mármore e Granito
                     </h1>
                     <p className="text-lg text-gray-700 mb-8">
-                        Marmoraria Moriá: Qualidade, versatilidade e condições que cabem no seu bolso.
+                        Marmoraria Portolani: Qualidade, versatilidade e condições que cabem no seu bolso.
                     </p>
 
                     <a

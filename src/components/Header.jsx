@@ -11,7 +11,7 @@ const Header = () => {
                     {/* Logo */}
                     <div className="flex-shrink-0 flex items-center">
                         <span className="text-xl font-bold text-gray-800 uppercase tracking-wide">
-                            Marmoraria Moriá
+                            Marmoraria Portolani
                         </span>
                     </div>
 

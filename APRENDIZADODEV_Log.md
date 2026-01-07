@@ -5896,3 +5896,76 @@ const StoneCard = ({ title, image }) => {
     );
 };
 ```
+
+---
+
+## Implementações Especiais
+
+### 📱 Componente: Card 3D Flip (Click/Touch)
+**Data:** 07/01/2026
+**Objetivo:** Criar uma experiência de card interativo com efeito 3D flip robusto, priorizando a usabilidade em dispositivos móveis (touch) e desktop, garantindo que o usuário tenha controle total sobre o estado do card (frente/verso).
+
+**Decisão de Design:**
+Substituir a interação baseada em `hover` (que é inconsistente em mobile) por uma interação baseada em **estado de click/tap**.
+- **Mobile Friendly:** O usuário toca para ver detalhes e toca novamente para fechar.
+- **Desktop:** O comportamento de clique é intuitivo e evita "flips" acidentais ao passar o mouse.
+- **Visual Premium:** Manter a perspectiva 3D e animação suave, com imagens em tamanho original (full cover) para máximo impacto visual.
+
+**Código do Componente (StoneCard):**
+```jsx
+import React, { useState } from 'react';
+
+const StoneCard = ({ title, image }) => {
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    return (
+        <div
+            // Container define a altura fixa e a perspectiva 3D
+            className="h-[450px] perspective-1000 cursor-pointer"
+            onClick={() => setIsFlipped(!isFlipped)}
+        >
+            {/* Wrapper que realiza o giro 3D */}
+            <div className={`relative w-full h-full transition-transform duration-[1500ms] transform-style-3d rounded-lg shadow-sm hover:shadow-2xl ${isFlipped ? 'rotate-y-180' : ''}`}>
+
+                {/* --- LADO DA FRENTE (Imagem Full) --- */}
+                <div className="absolute w-full h-full backface-hidden bg-gray-50 rounded-lg transform-style-3d flex flex-col items-center justify-center pt-8 pb-4">
+                    
+                    {/* Container da Imagem: Altura definida e overflow hidden */}
+                    <div className="w-10/12 h-[320px] rounded-lg overflow-hidden transform-style-3d shadow-xl translate-z-30">
+                        <img
+                            src={image}
+                            alt={title}
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+
+                    {/* Título Flutuante */}
+                    <div className="p-4 text-center transform-style-3d mt-2">
+                        <h3 className="font-bold text-gray-800 text-lg translate-z-50 drop-shadow-lg">{title}</h3>
+                    </div>
+                </div>
+
+                {/* --- LADO DE TRÁS (Detalhes) --- */}
+                <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-gray-900 rounded-lg flex flex-col items-center justify-center p-6 text-center transform-style-3d">
+                    {/* Miniatura Circular */}
+                    <img
+                        src={image}
+                        alt={title}
+                        className="w-24 h-24 rounded-full object-cover mb-3 border-4 border-moria-green/30 translate-z-50 shadow-xl drop-shadow-2xl"
+                    />
+                    <h3 className="text-xl font-bold text-white mb-2 translate-z-60 drop-shadow-lg">{title}</h3>
+                    <p className="text-gray-300 text-sm mb-4 translate-z-60 drop-shadow-xl">Toque de sofisticação para seu ambiente.</p>
+                    <button type="button" className="inline-block px-4 py-2 bg-moria-green text-white rounded-full text-xs font-bold uppercase tracking-wide translate-z-60 shadow-lg cursor-pointer hover:scale-105 transition-transform drop-shadow-xl">
+                        Ver Detalhes
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+```
+
+**Principais Aprendizados:**
+1. **Click vs Hover:** Para elementos complexos 3D em LPs que visam mobile, preferir sempre `onClick` com `useState`.
+2. **Imagens Verticais:** Aumentar a altura do card (`h-[450px]`) valoriza muito mais produtos visuais (como mármores) do que cards quadrados ou horizontais.
+3. **Profundidade:** O uso de `translate-z` nos elementos filhos (título, imagem, botões) dentro de um pai com `transform-style-3d` é essencial para o efeito de "camadas flutuantes" durante o giro.
