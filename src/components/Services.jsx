@@ -38,9 +38,15 @@ const StoneCard = ({ title, image }) => {
                     />
                     <h3 className="text-xl font-bold text-white mb-2 translate-z-60 drop-shadow-lg">{title}</h3>
                     <p className="text-gray-300 text-sm mb-4 translate-z-60 drop-shadow-xl">Toque de sofisticação para seu ambiente.</p>
-                    <button type="button" className="inline-block px-4 py-2 bg-moria-green text-white rounded-full text-xs font-bold uppercase tracking-wide translate-z-60 shadow-lg cursor-pointer hover:scale-105 transition-transform drop-shadow-xl">
-                        Ver Detalhes
-                    </button>
+                    <a
+                        href="https://api.whatsapp.com/send?phone=5516997531780&text=Ol%C3%A1!%20Estou%20no%20site%20e%20gostaria%20de%20um%20Or%C3%A7amento."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-block px-4 py-2 bg-moria-green text-white rounded-full text-xs font-bold uppercase tracking-wide translate-z-60 shadow-lg cursor-pointer hover:scale-105 transition-transform drop-shadow-xl"
+                    >
+                        Chamar no WhatsApp
+                    </a>
                 </div>
             </div>
         </div>
