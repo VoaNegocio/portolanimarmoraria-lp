@@ -22,7 +22,7 @@ const Header = () => {
                         <a href="#hero" className="text-gray-600 hover:text-moria-green font-medium transition-colors">Início</a>
                         <a href="#services" className="text-gray-600 hover:text-moria-green font-medium transition-colors">Pedras</a>
                         <a href="#differentials" className="text-gray-600 hover:text-moria-green font-medium transition-colors">Sobre</a>
-                        <a href="#contact" className="text-gray-600 hover:text-moria-green font-medium transition-colors">Contato</a>
+                        <a href="https://api.whatsapp.com/send?phone=5516997531780&text=Ol%C3%A1!%20Estou%20no%20site%20e%20gostaria%20de%20um%20Or%C3%A7amento." target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-moria-green font-medium transition-colors">Contato</a>
                     </nav>
 
                     {/* Mobile Menu Button */}
@@ -44,7 +44,7 @@ const Header = () => {
                         <a href="#hero" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-moria-green hover:bg-gray-50" onClick={() => setIsOpen(false)}>Início</a>
                         <a href="#services" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-moria-green hover:bg-gray-50" onClick={() => setIsOpen(false)}>Pedras</a>
                         <a href="#differentials" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-moria-green hover:bg-gray-50" onClick={() => setIsOpen(false)}>Sobre</a>
-                        <a href="#contact" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-moria-green hover:bg-gray-50" onClick={() => setIsOpen(false)}>Contato</a>
+                        <a href="https://api.whatsapp.com/send?phone=5516997531780&text=Ol%C3%A1!%20Estou%20no%20site%20e%20gostaria%20de%20um%20Or%C3%A7amento." target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-moria-green hover:bg-gray-50" onClick={() => setIsOpen(false)}>Contato</a>
                     </div>
                 </div>
             )}
