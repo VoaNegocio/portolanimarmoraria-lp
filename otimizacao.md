@@ -181,5 +181,23 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 
 ---
 
+#### 📅 Ciclo: First Contentful Paint (FCP) Insano (Jan 2026 - 2.0)
+*Foco: Reduzir FCP de 2.6s para < 1s (App Shell Injection)*
+
+**❌ O que Erramos**
+1.  **Dependência de JS**: Sendo um SPA (Single Page App), o navegador baixava HTML vazio -> baixava JS -> executava JS -> montava o DOM -> Pintava. Isso garantia um FCP mínimo de 2.0s em redes móveis.
+2.  **Tela Branca**: O usuário via uma tela branca durante todo o boot do React.
+
+**✅ O que Acertamos**
+1.  **App Shell (Skeleton)**: Injetamos o HTML estático do `Header` e `Hero` diretamente no `index.html` (dentro de `<div id="root">`).
+2.  **Paint Imediato**: Assim que o CSS baixa (300ms), o navegador pinta o Hero e o Header **antes** do React acordar.
+3.  **Hidratação Silenciosa**: Quando o React carrega (2.6s), ele assume o controle do DOM que já estava lá, tornando a transição invisível.
+
+**💡 O APRENDIZADO**
+*   **Regra do SSR Fake**: Se não pode usar Next.js (SSR), injete o HTML da "primeira dobra" estaticamente no `index.html`. Isso engana o cérebro do usuário (e o Lighthouse) dando a impressão de carregamento instantâneo.
+*   **Regra da Duplicação**: Sim, você duplica código (HTML no index e JSX no componente), mas o ganho de 1.5s no FCP vale a manutenção extra.
+
+---
+
 ### [Próximo Cíclo...]
 *Adicione novos aprendizados aqui, respeitando a seção do projeto.*
