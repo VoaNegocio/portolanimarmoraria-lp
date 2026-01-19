@@ -7,13 +7,19 @@ const Hero = () => {
         <section id="hero" className="relative w-full h-[600px] md:h-[700px] flex items-center bg-gray-100">
             {/* Background Image */}
             {/* Background Image */}
-            <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: 'url(/hero3.webp)' }}
-                role="img"
-                aria-label="Cozinha com mármore"
-            >
-                {/* Overlay for small screens if needed, mostly transparent on desktop to show image */}
+            {/* Background Image (LCP Optimized) */}
+            <div className="absolute inset-0 w-full h-full">
+                <picture>
+                    <source media="(max-width: 767px)" srcSet="/hero3-mobile.webp" />
+                    <source media="(min-width: 768px)" srcSet="/hero3.webp" />
+                    <img
+                        src="/hero3.webp"
+                        alt="Cozinha com mármore"
+                        className="w-full h-full object-cover object-center"
+                        fetchpriority="high"
+                    />
+                </picture>
+                {/* Overlay */}
                 <div className="absolute inset-0 bg-black/20 md:bg-transparent"></div>
             </div>
 

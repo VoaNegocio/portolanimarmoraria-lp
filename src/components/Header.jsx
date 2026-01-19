@@ -11,9 +11,11 @@ const Header = () => {
                     {/* Logo */}
                     <div className="flex-shrink-0 flex items-center">
                         <img
-                            src="/logomarmoraria.png"
+                            src="/logomarmoraria.webp"
                             alt="Marmoraria Portolani Logo"
                             className="h-12 w-auto md:h-20 object-contain"
+                            width="80"
+                            height="80"
                         />
                     </div>
 

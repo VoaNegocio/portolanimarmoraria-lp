@@ -7,9 +7,11 @@ const Footer = () => {
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                     <div className="text-center md:text-left flex flex-col items-center md:items-start">
                         <img
-                            src="/logomarmoraria.png"
+                            src="/logomarmoraria.webp"
                             alt="Marmoraria Portolani"
                             className="h-16 md:h-20 w-auto mb-4 object-contain"
+                            width="80"
+                            height="80"
                         />
                         <h3 className="text-xl font-bold uppercase mb-2">Marmoraria Portolani</h3>
                         <p className="text-gray-400 text-sm">Qualidade e tradição em mármores e granitos.</p>

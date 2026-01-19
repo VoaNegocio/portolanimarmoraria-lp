@@ -3,18 +3,57 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/png" href="/logomarmoraria.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Marmoraria Portolani</title>
-  <!-- Importing Inter Font -->
+
+  <!-- Preload LCP Images (Responsive) -->
+  <link rel="preload" as="image" href="/hero3-mobile.webp" media="(max-width: 767px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/hero3.webp" media="(min-width: 768px)" fetchpriority="high">
+
+  <!-- Importing Inter Font (Async) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/assets/index-C1kjvPTN.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CJyFd4Sx.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </noscript>
+
+  <!-- Google Tag Manager (Lazy Load) -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+
+      var loaded = false;
+      function loadGTM() {
+        if (loaded) return;
+        loaded = true;
+        var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      }
+
+      // Delay GTM load by 5 seconds or upon user interaction
+      setTimeout(loadGTM, 5000);
+      window.addEventListener('scroll', loadGTM, { once: true });
+      window.addEventListener('mousemove', loadGTM, { once: true });
+      window.addEventListener('touchstart', loadGTM, { once: true });
+    })(window, document, 'script', 'dataLayer', 'GTM-TSCZHDCN');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <script type="module" crossorigin src="/assets/index-BfMT_qV_.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/vendor-J47NxGia.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-BzlMn88B.css">
 </head>
 
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TSCZHDCN" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <div id="root"></div>
 </body>
 

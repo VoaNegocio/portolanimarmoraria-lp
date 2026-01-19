@@ -11,7 +11,7 @@ const CTAButton = ({
     shimmer = true,
     ...props
 }) => {
-    const baseStyles = "relative inline-flex items-center justify-center font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg group overflow-hidden";
+    const baseStyles = "relative inline-flex items-center justify-center font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg group";
 
     const variants = {
         primary: "bg-moria-green hover:bg-[#20bd5a] text-white",
@@ -30,9 +30,9 @@ const CTAButton = ({
             className={twMerge(baseStyles, variants[variant], pulseClass, className)}
             {...props}
         >
-            {/* Shimmer Effect Container */}
+            {/* Shimmer Effect Container (Clipped) */}
             {shimmer && (
-                <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+                <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none z-10">
                     <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[150%] skew-x-[-15deg] animate-shimmer"></div>
                 </div>
             )}

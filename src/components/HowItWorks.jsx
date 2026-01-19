@@ -33,9 +33,10 @@ const HowItWorks = () => {
                     {/* Imagem de Contexto (Direita) */}
                     <div className="w-full md:w-3/5 h-[500px] md:h-[650px] relative z-0 order-1 md:order-2">
                         <img
-                            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653&auto=format&fit=crop"
+                            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800&auto=format&fit=crop"
                             alt="Escada de Mármore Luxuosa"
                             className="w-full h-full object-cover rounded-lg shadow-xl"
+                            loading="lazy"
                         />
                         {/* Elemento decorativo */}
                         <div className="absolute -top-6 -right-6 w-32 h-32 bg-moria-green/10 rounded-full -z-10 hidden md:block"></div>
