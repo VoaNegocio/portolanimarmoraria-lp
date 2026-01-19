@@ -161,13 +161,13 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 2.  **Touch Target Padding**: No CSS dos *dots*, adicionamos `p-2` (padding) ao botão transparente envolvente para expandir a área de clique sem mudar o visual.
 3.  **Refinamento de Cores**: Escurecemos o texto do footer (`text-gray-400` -> `500`) para garantir leitura.
 4.  **Resizing Cirúrgico**: Rodamos `ffmpeg scale=560:-1` nas imagens de grid, economizando mais ~100KB no total.
-5.  **Compressão Agressiva (Mobile)**: Para obter Score 95+, reprocessamos `hero3-mobile.webp` com qualidade `65` (antes 80), reduzindo de 44KB para ~32KB sem perda visual perceptível em telas pequenas.
+5.  **Compressão "Ultra" (Mobile)**: Para obter Score 95+ estável, reprocessamos `hero3-mobile.webp` com qualidade `55` (30KB) e `areagourmet.webp` com qualidade `50` (94KB).
 
 #### 💡 O APRENDIZADO
 1.  **Regra do Botão Vazio**: Se o botão só tem ícone, **OBRIGATÓRIO** ter `aria-label`.
 2.  **Regra do Dedo Gordo**: Elementos clicáveis mobile precisam de `padding` invisível para atingir 44x44px, mesmo que o ícone seja pequeno.
 3.  **Regra dos 500px**: Se a imagem compõe um grid de 2 ou 3 colunas, dificilmente precisa passar de 600px de largura física. Redimensione.
-4.  **Regra do LCP Mobile**: Em conexões 4G lentas, cada KB conta. Para imagens de fundo mobile, qualidade 60-65 é aceitável se garantir LCP < 2.5s.
+4.  **Regra do LCP Mobile**: Em conexões 4G lentas, cada KB conta. Para imagens de fundo mobile, qualidade 50-60 é aceitável se garantir LCP < 2.5s.
 
 ---
 
