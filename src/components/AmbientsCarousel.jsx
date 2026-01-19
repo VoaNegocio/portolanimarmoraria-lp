@@ -100,9 +100,11 @@ const AmbientsCarousel = () => {
                         <button
                             key={index}
                             onClick={() => setCurrent(index)}
-                            className={`w-3 h-3 rounded-full transition-colors ${index === current ? 'bg-white' : 'bg-white/40'
-                                }`}
-                        />
+                            className={`p-2 transition-colors focus:outline-none group`}
+                            aria-label={`Ir para slide ${index + 1}: ${slides[index].title}`}
+                        >
+                            <span className={`block w-3 h-3 rounded-full transition-colors ${index === current ? 'bg-white' : 'bg-white/40 group-hover:bg-white/60'}`} />
+                        </button>
                     ))}
                 </div>
 

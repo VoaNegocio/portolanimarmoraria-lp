@@ -18,10 +18,10 @@ const Footer = () => {
                     </div>
 
                     <div className="text-center md:text-right">
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-400">
                             &copy; {new Date().getFullYear()} Marmoraria Portolani. Todos os direitos reservados.
                         </p>
-                        <p className="text-xs text-gray-600 mt-2">
+                        <p className="text-xs text-gray-500 mt-2">
                             Desenvolvido por Voa Negócio
                         </p>
                     </div>

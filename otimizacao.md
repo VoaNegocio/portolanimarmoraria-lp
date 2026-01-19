@@ -148,5 +148,26 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 
 ---
 
+### 📅 Ciclo: Acessibilidade & Imagens Finas (Jan 2026 - 1.7)
+
+#### ❌ O que Erramos / Problemas Encontrados
+1.  **Botões Sem Nome**: Ícones de menu e carrossel não tinham `aria-label`, sendo invisíveis para leitores de tela ("botão vazio").
+2.  **Toque Difícil no Mobile**: Os pontos do carrossel eram muito pequenos (3px visual), dificultando o toque em celulares (< 44px área de toque).
+3.  **Contraste Baixo**: O texto cinza claro no footer escuro e o branco sobre verde no WhatsApp não passavam no WCAG AA (Score Acessibilidade 83).
+4.  **Imagens Excedentes**: Algumas imagens secundárias (`pedrasrefinadas`, `classicas`) ainda tinham 1000px+ mas exibiam em 560px.
+
+#### ✅ O que Acertamos / Soluções Aplicadas
+1.  **Aria-Labels Explícitos**: Adicionamos `aria-label="Abrir menu"` e `aria-label="Ir para slide X"` dinâmicos.
+2.  **Touch Target Padding**: No CSS dos *dots*, adicionamos `p-2` (padding) ao botão transparente envolvente para expandir a área de clique sem mudar o visual.
+3.  **Refinamento de Cores**: Escurecemos o texto do footer (`text-gray-400` -> `500`) para garantir leitura.
+4.  **Resizing Cirúrgico**: Rodamos `ffmpeg scale=560:-1` nas imagens de grid, economizando mais ~100KB no total.
+
+#### 💡 O APRENDIZADO
+1.  **Regra do Botão Vazio**: Se o botão só tem ícone, **OBRIGATÓRIO** ter `aria-label`.
+2.  **Regra do Dedo Gordo**: Elementos clicáveis mobile precisam de `padding` invisível para atingir 44x44px, mesmo que o ícone seja pequeno.
+3.  **Regra dos 500px**: Se a imagem compõe um grid de 2 ou 3 colunas, dificilmente precisa passar de 600px de largura física. Redimensione.
+
+---
+
 ### [Próximo Ciclo...]
 *Adicione novos aprendizados aqui sem remover os anteriores.*

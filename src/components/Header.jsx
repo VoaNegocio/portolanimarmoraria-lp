@@ -32,6 +32,7 @@ const Header = () => {
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className="text-gray-600 hover:text-gray-900 focus:outline-none p-2"
+                            aria-label={isOpen ? "Fechar menu principal" : "Abrir menu principal"}
                         >
                             {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
                         </button>
