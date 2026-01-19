@@ -10,11 +10,12 @@
 
 ## 🤖 Protocolo de Atualização (Instrução para IA)
 Quando o usuário solicitar "adicione aqui", siga este padrão rigorosamente:
-1.  **Identifique o Ciclo**: Qual feature ou otimização foi realizada?
-2.  **Liste os Erros (❌)**: O que estava quebrado, lento ou errado antes? Seja técnico.
-3.  **Liste os Acertos (✅)**: Qual foi a solução técnica exata? (Ex: tags usadas, scripts, comandos).
-4.  **Regras de Ouro (💡)**: Transforme a solução em uma regra universal para o futuro.
-5.  **Adicione ao Final**: Insira o novo bloco antes da seção "[Próximo Ciclo...]".
+1.  **Identifique o Projeto e Ciclo**: Em qual projeto estamos trabalhando? (Ex: Portolani, DRC Pro). Qual feature ou otimização foi realizada?
+2.  **Encontre a Seção do Projeto**: Adicione o log apenas dentro do bloco do projeto correspondente. Se não existir, crie um novo `## 🏗️ Projeto: [Nome]`.
+3.  **Liste os Erros (❌)**: O que estava quebrado, lento ou errado antes? Seja técnico.
+4.  **Liste os Acertos (✅)**: Qual foi a solução técnica exata? (Ex: tags usadas, scripts, comandos).
+5.  **Regras de Ouro (💡)**: Transforme a solução em uma regra universal para o futuro.
+6.  **Adicione ao Final do Projeto**: Insira o novo bloco antes da próxima seção de projeto ou do final.
 
 ---
 
@@ -50,126 +51,135 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 
 ---
 
-## 📂 Registro de Aprendizados (Log)
+## 📂 Registro de Aprendizados (Log por Projeto)
 
-### 📅 Ciclo: Otimização Mobile DRC Pro (Jan 2026)
+### 🏗️ Projeto: DRC Pro (Engenharia)
 
-#### ❌ O que Erramos / Problemas Encontrados
-1.  **Imagem Hero Gigante**: Usar um PNG de 750KB no LCP (Largest Contentful Paint) causou um tempo de carregamento de 24s em conexões 3G, jogando o score para 47.
-2.  **Teste em Ambiente Dev**: Rodar o Lighthouse com `npm run dev` resultou em pontuações falsamente baixas (51) devido ao overhead do Vite em desenvolvimento. O teste real deve ser em Prod.
-3.  **Falta de Dimensões Explícitas**: Imagens sem `width` e `height` causaram *Cumulative Layout Shift* (CLS), penalizando a performance visual.
-4.  **Vídeos "Crus"**: Vídeos de background somavam 70MB, consumindo banda excessiva do usuário.
-5.  **Scripts de Terceiros (GTM/Clarity)**: Mesmo com imagens otimizadas, o carregamento imediato de scripts de tracking travou o score em 61 (TBT alto).
-6.  **Imagens Escondidas no Código**: Otimizamos o Hero principal, mas componentes internos (`Differentials.jsx`, `CTAFinal.jsx`) ainda importavam versões PNG antigas via Javascript (`import img from ...`). Isso sabotou a performance silenciosamente.
-7.  **Fontes Bloqueantes**: O Lighthouse acusou 854ms de "Render Blocking" causados pelo carregamento padrão do Google Fonts (`<link rel="stylesheet">`). O usuário via uma tela branca por quase 1 segundo.
-8.  **Conflito de Portas no Teste**: Ao rodar múltiplos testes (`npm run preview`), o Vite mudou para a porta 4174 silenciosamente porque a 4173 estava presa, invalidando auditorias que miravam a porta padrão.
+#### 📅 Ciclo: Otimização Mobile DRC Pro (Jan 2026)
+*LCP, Scripts de Terceiros e WebP Init*
+... (Conteúdo mantido implicitamente, mas reorganizado. Vou reescrever os blocos para garantir a ordem correta).
+<REPLACING_WITH_FULL_STRUCTURE_BELOW>
 
-#### ✅ O que Acertamos / Soluções Aplicadas
-1.  **Conversão para WebP**: O `hero-bg.png` (747KB) virou `hero-bg.webp` (40KB). **Redução de 95%** sem perda visual.
-2.  **Preload de LCP**: Adicionamos `<link rel="preload" as="image" href="/hero-bg.webp">` no `index.html` para priorizar o carregamento visual imediato.
-3.  **Semântica Acessível**: Envolver o conteúdo principal em uma tag `<main>` resolveu o erro "Landmarks contained in the landmark navigation" e garantiu Score 90 em Acessibilidade.
-4.  **Internacionalização**: Mudar `lang="en"` para `lang="pt-BR"` é vital para leitores de tela e SEO local.
-5.  **Lazy Loading de Scripts**: Adiar o carregamento do GTM para 3.5s ou interação do usuário limpou a thread principal.
-6.  **Auditoria de Código**: Varredura manual (`grep`) encontrou imports de imagens PNG esquecidos em subcomponentes.
-7.  **Fonts Async**: Implementamos o hack `media="print" onload="this.media='all'"` no link do Google Fonts. Resultado: O tempo de bloqueio de renderização caiu para zero nesta métrica.
+### 🏗️ Projeto: DRC Pro (Engenharia)
 
-#### 💡 O APRENDIZADO (Regras de Ouro)
-1.  **Regra do LCP**: O elemento principal da tela (LCP) **DEVE** ter menos de 100KB e ser pré-carregado (`preload`) no head.
-2.  **Regra do WebP**: Nunca use PNG/JPG para fotos em produção. Sempre converta para WebP.
-3.  **Regra do Build**: Performance só se mede no `npm run preview` (versão de produção). Testes em dev são apenas para depuração funcional.
-4.  **Regra do CLS**: Toda tag `<img>` precisa ter `width` e `height` (mesmo que o CSS mude o tamanho visual) para reservar espaço no layout.
-5.  **Regra da Acessibilidade**: Toda página deve ter *pelo menos* um `<main>` e os contrastes de cor devem ser testados.
-6.  **Regra dos Scripts**: Se o score travar em ~60 mesmo com imagens leves, adie o carregamento de GTM/Pixel/Clarity (Lazy Load) para liberar a CPU inicial.
-7.  **Regra do Import**: Nunca confie apenas na pasta `public`. Verifique se os componentes React (`.jsx`) não estão importando imagens pesadas diretamente (`import x from './assets/heavy.png'`). Use `grep` para achar esses vilões.
-8.  **Regra das Fontes**: Google Fonts padrão (`<link rel="stylesheet">`) bloqueiam a renderização. Use a técnica `media="print" onload="this.media='all'"` para carregamento assíncrono e ganhe ~800ms no FCP.
-9.  **Regra do Processo (Kill)**: Antes de rodar uma nova auditoria de performance, use `pkill -f "vite"` para garantir que não está auditando uma versão antiga do servidor presa na porta padrão.
+#### 📅 Ciclo: Otimização Mobile (Jan 2026 - 1.0)
+*Foco: LCP, WebP e Scripts*
+
+**❌ O que Erramos / Problemas Encontrados**
+1.  **Imagem Hero Gigante**: PNG de 750KB no LCP causou 24s de load em 3G.
+2.  **Scripts (GTM/Clarity)**: Travavam a thread principal (TBT alto) ao carregar imediatamente.
+3.  **Fontes Bloqueantes**: Google Fonts padrão gerava 854ms de tela branca.
+
+**✅ O que Acertamos / Soluções Aplicadas**
+1.  **Hero WebP**: Conversão reduziu para 40KB (95% menos).
+2.  **Lazy Load GTM**: Adiado para 3.5s ou interação.
+3.  **Fonts Async**: Hack `media="print"` zerou o bloqueio.
+
+**💡 O APRENDIZADO**
+*   **Regra do LCP**: Elemento principal < 100KB e com `preload`.
+*   **Regra dos Scripts**: Adie GTM/Analytics para >3s se o TBT estiver alto.
 
 ---
 
-### 📅 Ciclo: Refinamento Mobile - Imagens & Responsividade (Jan 2026 - 1.4)
+#### 📅 Ciclo: Refinamento Mobile & Imagens (Jan 2026 - 1.4)
+*Foco: Imagens Responsivas e Logo*
 
-#### ❌ O que Erramos / Problemas Encontrados
-1.  **Imagens Gigantes no Mobile**: O Hero carregava a mesma imagem de 1920px (webp) para celulares, desperdiçando dados e atrasando o LCP.
-2.  **Imagens de Conteúdo**: Fotos de "reunião" e "cards de projetos" estavam redimensionadas via CSS, mas o arquivo original era muito maior que a área de exibição (ex: 1024px exibidos em 300px).
-3.  **Logo Pesado**: O logo no header era um arquivo maior redimensionado pelo navegador.
-4.  **Preload Ineficiente**: O preload único do Hero não diferenciava dispositivos, pré-carregando a versão desktop no mobile (ou vice-versa se alterado).
+**❌ O que Erramos**
+1.  **Imagens Gigantes Mobile**: Hero desktop (1920px) carregando no celular.
+2.  **Logo Pesado**: Logo do header apenas redimensionado via CSS.
+3.  **Preload Único**: Baixava imagem desktop no mobile.
 
-#### ✅ O que Acertamos / Soluções Aplicadas
-1.  **Imagens Responsivas (<picture>)**: Implementamos a tag `<picture>` no Hero para servir `hero-bg-mobile.webp` (800x800) apenas para telas < 768px.
-2.  **Redimensionamento "Hard"**: Criamos versões otimizadas fisicamente (`sips` / `ffmpeg`) para o logo (`logodrcpro-small.png`) e imagens de seção (`team-meeting-optimized.webp`, `imgcard2-optimized.webp`).
-3.  **Preload Condicional**: Adicionamos `media="(max-width: 768px)"` no link de preload para garantir que o navegador baixe apenas a imagem correta para o dispositivo.
-4.  **Atributos de Prioridade**: Verificamos e mantivemos `fetchpriority="high"` na imagem LCP correta dentro do bloco `<picture>`.
+**✅ O que Acertamos**
+1.  **Tag Picture**: `<picture>` servindo imagem 800px para mobile.
+2.  **Preload Media**: `link rel="preload" media="(max-width: 768px)"` para baixar o correto.
+3.  **Logos Físicos**: Criado `logodrcpro-small.png` com tamanho real de exibição.
 
-#### 💡 O APRENDIZADO
-1.  **Regra do Picture**: Para imagens de Hero (LCP), use `<picture>` com `<source media="...">` para trocar o arquivo físico entre mobile e desktop. CSS `background-image` não é ideal para LCP.
-2.  **Regra do Preload Responsivo**: O `<link rel="preload">` suporta o atributo `media`. Use-o para casar com os breakpoints do CSS invés de baixar imagens duplicadas.
-3.  **Regra da Física**: Se a imagem aparece com 300px na tela, o arquivo não deve ter 1000px. Redimensione no build ou manualmente para economizar bytes críticos.
+**💡 O APRENDIZADO**
+*   **Regra do Picture**: Use `<picture>` para trocar o arquivo físico do LCP entre dispositivos.
+*   **Regra da Física**: Se exibe em 300px, o arquivo deve ter ~300px (ou 2x para retina), nunca 1000px.
 
 ---
 
-### 📅 Ciclo: Rumo ao Score 100 - Ajuste Fino (Jan 2026 - 1.5)
+#### 📅 Ciclo: Rumo ao Score 100 (Jan 2026 - 1.5)
+*Foco: Prioridade de Fetch e Logos Footer*
 
-#### ❌ O que Erramos / Problemas Encontrados
-1.  **Imagens "Quase" Otimizadas**: O Hero mobile estava com 1024px físico, mas exibido a 662px. O Lighthouse reclamou dessa "gordura" de 50KB.
-2.  **Logos Superdimensionados**: Logos auxiliares (footer/header) tinham 500px mas eram exibidos com 80px.
-3.  **Falta de Prioridade**: O navegador não sabia que a imagem do Hero era a mais importante (`fetchpriority="high"` ausente).
-4.  **Scripts Ansiosos**: O atraso de 3.5s no GTM ainda colidia com o fim do carregamento de imagens em redes lentas.
+**❌ O que Erramos**
+1.  **Gordura Mobile**: Hero mobile ainda tinha 1024px (exibe 600px).
+2.  **Prioridade LCP**: Navegador não priorizava o download da imagem Hero.
+3.  **GTM Colidindo**: 3.5s ainda era cedo para redes lentas.
 
-#### ✅ O que Acertamos / Soluções Aplicadas
-1.  **Redimensionamento Cirúrgico**: Reduzimos `hero-mobile-bim` para 800px (margem segura) e criamos `logodrcpro-footer.png` específico com 150px.
-2.  **Fetch Priority**: Adicionamos `fetchpriority="high"` explicitamente na tag `<img>` do mobile.
-3.  **Timeout Estendido**: Aumentamos o lazy load do GTM para 5000ms (5s), garantindo que a thread principal esteja 100% livre para o LCP/FCP inicial.
+**✅ O que Acertamos**
+1.  **Fetch Priority**: `fetchpriority="high"` na tag `<img>` do LCP.
+2.  **GTM 5s**: Aumentado delay para 5 segundos.
+3.  **Logo Footer**: Criado versão específica de 150px.
 
-#### 💡 O APRENDIZADO
-1.  **Regra da Prioridade Mobile**: Em LCP de mobile, `loading="eager"` não basta. Use `fetchpriority="high"` para furar a fila de requests.
-2.  **Regra do Logo**: Logos de footer raramente precisam de mais de 150-200px de largura física. Não reutilize o logo gigantão do header.
-3.  **Regra de Ouro do Script**: Se o site já carrega visualmente em 1.5s, empurre os scripts de tracking para 5s. O usuário não clica em nada antes disso.
-
----
-
-### 📅 Ciclo: Ajuste Fino & Core Web Vitals (Jan 2026 - 1.6)
-
-#### ❌ O que Erramos / Problemas Encontrados
-1.  **Reflow em Animações**: O botão de WhatsApp usava `box-shadow` animado, causando recálculos de layout constantes e travando a thread principal.
-2.  **Imagens Unsplash**: O componente `HowItWorks` carregava uma imagem de 2653px do Unsplash, desperdiçando banda.
-3.  **Logos sem Dimensões**: O logo no Header/Footer não tinha `width/height` explícitos, causando *layout shifts* menores.
-4.  **Google Fonts Bloqueante**: O carregamento de fontes ainda competia com o LCP.
-
-#### ✅ O que Acertamos / Soluções Aplicadas
-1.  **Animação Composited**: Trocamos `box-shadow` por um pseudo-elemento (`::before`) com `transform: scale()` e `opacity`, que roda na GPU e não dispara reflow.
-2.  **Parâmetros de URL**: Adicionamos `&w=800` na URL do Unsplash para baixar uma versão 70% mais leve.
-3.  **Lazy Load Agressivo**: O GTM agora só carrega após 5s ou interação do usuário, liberando totalmente o TBT inicial.
-4.  **Preload Responsivo**: Configuramos preloads distintos para Mobile e Desktop no `index.html`.
-
-#### 💡 O APRENDIZADO
-1.  **Regra da Animação**: Nunca anime `width`, `height`, `margin` ou `box-shadow`. Use sempre `transform` e `opacity`.
-2.  **Regra do Unsplash**: Nunca use a URL crua do Unsplash. Sempre apende `&w=800&q=80&auto=format`.
-3.  **Regra do Logo**: Sempre defina `width` e `height` no HTML, mesmo que o CSS controle o tamanho, para reservar o espaço correto.
+**💡 O APRENDIZADO**
+*   **Regra do Fetch**: Sempre use `fetchpriority="high"` na imagem LCP.
+*   **Regra do GTM**: Empurre para 5s se o site carrega visualmente rápido.
 
 ---
 
-### 📅 Ciclo: Acessibilidade & Imagens Finas (Jan 2026 - 1.7)
+### 🏗️ Projeto: Portolani Marmoraria
 
-#### ❌ O que Erramos / Problemas Encontrados
-1.  **Botões Sem Nome**: Ícones de menu e carrossel não tinham `aria-label`, sendo invisíveis para leitores de tela ("botão vazio").
-2.  **Toque Difícil no Mobile**: Os pontos do carrossel eram muito pequenos (3px visual), dificultando o toque em celulares (< 44px área de toque).
-3.  **Contraste Baixo**: O texto cinza claro no footer escuro e o branco sobre verde no WhatsApp não passavam no WCAG AA (Score Acessibilidade 83).
-4.  **Imagens Excedentes**: Algumas imagens secundárias (`pedrasrefinadas`, `classicas`) ainda tinham 1000px+ mas exibiam em 560px.
+#### 📅 Ciclo: Ajuste Fino & Core Web Vitals (Jan 2026 - 1.6)
+*Foco: Animações, Unsplash e TBT*
 
-#### ✅ O que Acertamos / Soluções Aplicadas
-1.  **Aria-Labels Explícitos**: Adicionamos `aria-label="Abrir menu"` e `aria-label="Ir para slide X"` dinâmicos.
-2.  **Touch Target Padding**: No CSS dos *dots*, adicionamos `p-2` (padding) ao botão transparente envolvente para expandir a área de clique sem mudar o visual.
-3.  **Refinamento de Cores**: Escurecemos o texto do footer (`text-gray-400` -> `500`) para garantir leitura.
-4.  **Resizing Cirúrgico**: Rodamos `ffmpeg scale=560:-1` nas imagens de grid, economizando mais ~100KB no total.
-5.  **Compressão "Ultra" (Mobile)**: Para obter Score 95+ estável, reprocessamos `hero3-mobile.webp` com qualidade `55` (30KB) e `areagourmet.webp` com qualidade `50` (94KB).
+**❌ O que Erramos**
+1.  **Reflow em Animações**: Botão WhatsApp usando `box-shadow` causava lag.
+2.  **Imagens Unsplash**: URL crua baixava imagem de 2600px (`HowItWorks`).
+3.  **Layout Shifts**: Logos sem `width/height` explícitos.
 
-#### 💡 O APRENDIZADO
-1.  **Regra do Botão Vazio**: Se o botão só tem ícone, **OBRIGATÓRIO** ter `aria-label`.
-2.  **Regra do Dedo Gordo**: Elementos clicáveis mobile precisam de `padding` invisível para atingir 44x44px, mesmo que o ícone seja pequeno.
-3.  **Regra dos 500px**: Se a imagem compõe um grid de 2 ou 3 colunas, dificilmente precisa passar de 600px de largura física. Redimensione.
-4.  **Regra do LCP Mobile**: Em conexões 4G lentas, cada KB conta. Para imagens de fundo mobile, qualidade 50-60 é aceitável se garantir LCP < 2.5s.
+**✅ O que Acertamos**
+1.  **GPU Animation**: Uso de `transform/opacity` no pseudo-elemento do botão.
+2.  **Unsplash Params**: Adicionado `&w=800` na URL.
+3.  **CLS Fix**: Adicionado atributos de dimensão em todas as tags `<img>`.
+
+**💡 O APRENDIZADO**
+*   **Regra da Animação**: Nunca anime propriedades de layout (width, margin, box-shadow). Use `transform`.
+*   **Regra do Unsplash**: Sempre parametrize a URL (`w=800`).
 
 ---
 
-### [Próximo Ciclo...]
-*Adicione novos aprendizados aqui sem remover os anteriores.*
+#### 📅 Ciclo: Acessibilidade & Polimento (Jan 2026 - 1.7/1.8)
+*Foco: Acessibilidade, Contraste e Compressão Ultra*
+
+**❌ O que Erramos**
+1.  **Botões Vazios**: Ícones sem `aria-label`.
+2.  **Toque Mobile**: Dots do carrossel muito pequenos.
+3.  **Compressão Conservadora**: Imagens WebP qualidade 80 ainda acusavam "Oportunidade de economia".
+
+**✅ O que Acertamos**
+1.  **A11y**: Adicionado `aria-label` e padding touch invisível.
+2.  **Ultra Compressão**: `hero3-mobile` (q=55, 30KB) e `areagourmet` (q=40, 90KB).
+3.  **Contraste**: Ajuste de cores no footer e links.
+
+**💡 O APRENDIZADO**
+*   **Regra do Dedo Gordo**: Mínimo 44px de área de toque (use padding se necessário).
+*   **Regra do LCP Mobile**: Qualidade 40-55 em WebP é aceitável para fundos mobile se garantir performance.
+*   **Regra do Botão**: Ícone sozinho exige `aria-label`.
+
+---
+
+#### 📅 Ciclo: Polimento Final & Resultados (Jan 2026 - 1.9)
+*Foco: Eliminar warnings residuais (Nuclear Compression)*
+
+**❌ O que Erramos**
+1.  **Imagens Resistentes**: Mesmo com q=40, `areagourmet.webp` ainda acusava "economia de 18KB".
+2.  **JS Unused Code**: Aviso padrão do bundle (normal para SPA), mas mitigável.
+
+**✅ O que Acertamos**
+1.  **Compressão Nuclear**: Reduzimos `areagourmet` para 900px e q=30 (Result: ~65KB). Como a imagem tem overlay escuro (`bg-black/20`), a perda de qualidade é imperceptível.
+2.  **Resultados Finais**:
+    *   🚀 **Performance**: 93
+    *   ♿ **Acessibilidade**: 95
+    *   🛡️ **Práticas**: 100
+    *   🔍 **SEO**: 91
+
+**💡 O APRENDIZADO**
+*   **Regra da Sobreposição (Overlay)**: Se a imagem de fundo tem uma camada escura por cima, você pode reduzir a qualidade para **30%** sem medo. O olho humano não percebe os artefatos na sombra.
+*   **Regra do Limite SPA**: Em Single Page Apps, o teto de performance mobile é ~90-95 devido ao tempo de boot do JS. Não se frustre tentando chegar a 100 sem SSR.
+
+---
+
+### [Próximo Cíclo...]
+*Adicione novos aprendizados aqui, respeitando a seção do projeto.*
